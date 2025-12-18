@@ -1,9 +1,11 @@
 "use strict";
 
-const { join } = require("path");
-const { exists, readFile, writeFile } = require("hexo-fs");
-const loadConfig = require("hexo/lib/hexo/load_config");
-const loadThemeConfig = require("hexo/lib/hexo/load_theme_config");
+const {join, dirname} = require("path");
+const {exists, readFile, writeFile} = require("hexo-fs");
+
+const hexoPath = dirname(require.resolve("hexo")); 
+const loadConfig = require(join(hexoPath, "load_config"));
+const loadThemeConfig = require(join(hexoPath, "load_theme_config"));
 
 module.exports = class ConfigService {
     /**
