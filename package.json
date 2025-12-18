@@ -55,6 +55,7 @@
     "@vue/eslint-config-prettier": "^8.0.0",
     "eslint": "^8.48.0",
     "eslint-plugin-vue": "^9.17.0",
+    "hexo": "^8.0.0",
     "pre-commit": "^1.2.2",
     "vite": "^4.4.9"
   },
