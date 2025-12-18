@@ -16,7 +16,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Meteor2333/hexo-admin-plus.git",
-    "_upstream": "https://github.com/thesadabc/hexo-myadmin.git"
+    "_upstream": "https://github.com/xjpin/hexo-myadmin.git"
   },
   "bugs": {
     "url": "https://github.com/Meteor2333/hexo-admin-plus/issues"

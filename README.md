@@ -39,7 +39,8 @@ have it be long and complicated.
 
 ## Thanks
 
-[hexo-admin](https://www.npmjs.com/hexo-admin)
+[hexo-admin](https://github.com/jaredly/hexo-admin)
+[hexo-myadmin](https://github.com/xjpin/hexo-myadmin)
 
 ### Contribute
 - let me know how it can be improved in the [github issues](https://github.com/Meteor2333/hexo-admin-plus/issues)
