@@ -190,7 +190,7 @@ const tableData = computed(() =>
     })),
 );
 
-async function handlePublish(articleId){
+async function handlePublish(articleId) {
     const {code, data} = await api.publish(articleId);
     if (code) return;
     ElMessage.success("publish success");
@@ -200,7 +200,7 @@ async function handlePublish(articleId){
     articleList.value = [...articleList.value];
 }
 
-async function handleUnpublish(articleId){
+async function handleUnpublish(articleId) {
     const {code, data} = await api.unpublish(articleId);
     if (code) return;
     ElMessage.success("unpublish success");
@@ -210,7 +210,7 @@ async function handleUnpublish(articleId){
     articleList.value = [...articleList.value];
 }
 
-async function handleRemove(articleId){
+async function handleRemove(articleId) {
     const {code} = await api.remove(articleId);
     if (code) return;
     ElMessage.success("remove success");
@@ -218,7 +218,7 @@ async function handleRemove(articleId){
     articleList.value.splice(pIdx, 1);
 }
 
-async function loadList(page = 1){
+async function loadList(page = 1) {
     isLoading.value = true;
     const options = Object.assign({page}, filterForm);
     const {data} = await api.list(options);
@@ -230,13 +230,13 @@ async function loadList(page = 1){
 
 async function searchTagName(name) {
     const {data} = await tagApi.getTagList(name);
-    if (data){
+    if (data) {
         tagOptions.value  = data.list;
     }
 }
 async function searchCategoryName() {
     const {data} = await tagApi.getCategoryList();
-    if (data){
+    if (data) {
         categoryOptions.value = data.list;
     }
 }

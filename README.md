@@ -1,16 +1,14 @@
-# hexo-myadmin
+# hexo-admin-plus
 
-a hexo dashboard plugin, for live hexo server.
-
-![example](./example.gif)
+A hexo dashboard plugin, for live hexo server.
 
 ## USAGE
 
 Node.js >= 12.0.0 required.
 
 ```bash
-    # install hexo-myadmin
-    npm i hexo-myadmin --save
+    # install hexo-admin-plus
+    npm i hexo-admin-plus --save
 
     # start server with global hexo-cli
     hexo server
@@ -44,5 +42,5 @@ have it be long and complicated.
 [hexo-admin](https://www.npmjs.com/hexo-admin)
 
 ### Contribute
-- let me know how it can be improved in the [github issues](https://github.com/thesadabc/hexo-myadmin/issues)
-- [fork](https://github.com/thesadabc/hexo-myadmin) and pull-request
+- let me know how it can be improved in the [github issues](https://github.com/Meteor2333/hexo-admin-plus/issues)
+- [fork](https://github.com/Meteor2333/hexo-admin-plus) and pull-request

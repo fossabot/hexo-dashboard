@@ -10,7 +10,7 @@
     "es6": true,
     "ecmaVersion": 13
   },
-  rules: {
+  "rules": {
     "arrow-parens": 0,
     "generator-star-spacing": 0,
     "quotes": ["error", "double", {"avoidEscape": true}],

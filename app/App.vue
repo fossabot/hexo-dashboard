@@ -7,7 +7,7 @@
         router
         :default-active="route.path"
       >
-        <span class="el-menu-item">HEXO MYADMIN</span>
+        <span class="el-menu-item">HEXO ADMIN</span>
         <el-sub-menu index="Posts">
           <template #title>
             Posts

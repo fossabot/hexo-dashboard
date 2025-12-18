@@ -43,7 +43,7 @@ const api = props.articleApi;
 
 const articleDetail = ref({});
 onMounted(async () => {
-    if (props.articleId){
+    if (props.articleId) {
         const {data} = await api.raw(props.articleId);
         articleDetail.value = data;
     } else {
@@ -55,7 +55,7 @@ onMounted(async () => {
 });
 
 async function handleSave() {
-    if (props.articleId){
+    if (props.articleId) {
         const {code} = await api.update(props.articleId, articleDetail.value);
         if (!code) ElMessage.success("success");
     } else {

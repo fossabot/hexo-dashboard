@@ -1,6 +1,6 @@
 "use strict";
 
-const {"http":{Router, methods}} = require("director");
+const {"http":{ Router, methods }} = require("director");
 const ArticleService = require("./service/article");
 const CategoryService = require("./service/tag");
 const ConfigService = require("./service/config");
@@ -15,14 +15,14 @@ router.configure({"async": true, "recurse": false, "strict": false});
 // rewite methods for async controller
 methods.forEach((m) => {
     const _method = router[m];
-    router[m] = function (path, asyncHandler){
+    router[m] = function (path, asyncHandler) {
         _method.call(router, path, async function (...args) {
             // keep `this`
             const params = args.slice(0, -1);
             const nextFn = args[args.length - 1];
-            try{
+            try {
                 await asyncHandler.apply(this, params);
-            } catch(e) {
+            } catch (e) {
                 nextFn(e);
             }
         });

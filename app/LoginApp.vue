@@ -41,13 +41,13 @@ const loginFormEl = ref(null);
 const loginForm = reactive({});
 
 async function handelLogin() {
-    try{
+    try {
         await loginFormEl.value.validate();
-    }catch(e){
+    } catch (e) {
         return;
     }
     const {code} = await accountApi.login(loginForm);
-    if (!code){
+    if (!code) {
         location.href = "./index.html";
     }
 }

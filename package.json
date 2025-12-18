@@ -1,7 +1,7 @@
 {
-  "name": "hexo-myadmin",
+  "name": "hexo-admin-plus",
   "version": "1.1.0",
-  "description": "a hexo dashboard plugin, for live blog server.",
+  "description": "A hexo dashboard plugin, for live blog server.",
   "keywords": [
     "hexo",
     "admin",
@@ -10,16 +10,17 @@
     "vue3",
     "element-plus"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thesadabc/hexo-myadmin.git"
-  },
   "author": "thesadabc",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/thesadabc/hexo-myadmin/issues"
+  "homepage": "https://github.com/Meteor2333/hexo-admin-plus",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Meteor2333/hexo-admin-plus.git",
+    "_upstream": "https://github.com/thesadabc/hexo-myadmin.git"
   },
-  "homepage": "https://github.com/thesadabc/hexo-myadmin#readme",
+  "bugs": {
+    "url": "https://github.com/Meteor2333/hexo-admin-plus/issues"
+  },
   "engines": {
     "node": ">= 12.0.0"
   },
