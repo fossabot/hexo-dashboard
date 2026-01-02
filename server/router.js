@@ -1,13 +1,14 @@
 "use strict";
 
 const { "http":{ Router, methods } } = require("director");
+const AuthService = require("./service/auth");
 const ArticleService = require("./service/article");
 const TaxonomyService = require("./service/taxonomy");
 const ConfigService = require("./service/config");
+const authController = require("./controller/auth");
 const articleController = require("./controller/article");
 const taxonomyController = require("./controller/taxonomy");
 const configController = require("./controller/config");
-const authController = require("./controller/auth");
 
 const router = new Router();
 router.configure({ "async": true, "recurse": false, "strict": false });
@@ -17,7 +18,6 @@ methods.forEach((m) => {
     const _method = router[m];
     router[m] = function (path, asyncHandler) {
         _method.call(router, path, async function (...args) {
-            // keep `this`
             const params = args.slice(0, -1);
             const nextFn = args[args.length - 1];
             try {
@@ -33,16 +33,18 @@ module.exports = function (hexo) {
     router.attach(function () {
         this.hexo = hexo;
         this.service = {
+            "auth": new AuthService(hexo),
             "post": new ArticleService(hexo, "Post"),
             "page": new ArticleService(hexo, "Page"),
             "category": new TaxonomyService(hexo, "Category"),
             "tag": new TaxonomyService(hexo, "Tag"),
-            "config": new ConfigService(hexo),
+            "config": new ConfigService(hexo)
         };
     });
 
+    router.post("/auth", authController.authenticate);
+
     router.param("arttype", /(post|page)/);
-    router.post("/login", authController.login);
     router.get("/:arttype", articleController.list);
     router.get("/:arttype/:id", articleController.detail);
     router.get("/:arttype/:id/raw", articleController.raw);

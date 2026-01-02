@@ -4,8 +4,7 @@ module.exports.helper = function (req, resp, next) {
     resp.send = function (data) {
         resp.setHeader("Content-Type", "application/json");
 
-        const ret = { "msg": "unknow error", "code": -1 };
-
+        const ret = { "msg": "Unknown error", "code": -1 };
         switch (typeof (data)) {
             case "string":
                 ret.code = 1;
@@ -14,12 +13,12 @@ module.exports.helper = function (req, resp, next) {
             case "undefined":
             case "object":
                 ret.code = 0;
-                ret.msg = "ok";
+                ret.msg = "OK";
                 ret.data = data;
                 break;
             case "number":
                 ret.code = data;
-                ret.msg = "error: " + data;
+                ret.msg = "Error: " + data;
                 break;
         }
         resp.end(JSON.stringify(ret));
@@ -28,13 +27,12 @@ module.exports.helper = function (req, resp, next) {
 };
 
 module.exports.auth = function (req, resp, next) {
-    if (req.url.includes("/login")) return next();
-    if (req.session && req.session.login) return next();
+    if (req.url.includes("/auth")) return next();
+    if (req.session && req.session.loggedin) return next();
     resp.send(401);
 };
 
 module.exports.errorHandler = function (err, req, resp, next) {
-    console.error("Global ErrorHandler ", err);
+    if (resp.headersSent) return next(err);
     resp.send(err.toString());
-    next();
 };

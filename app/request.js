@@ -17,7 +17,7 @@ service.interceptors.response.use(
         const code = response.data.code;
         if (!code) return response.data;
         if (code === 401) {
-            dialogLoginVisible.value = true;
+            unauthorized.value = true;
             return null;
         }
 
@@ -31,4 +31,4 @@ service.interceptors.response.use(
 
 export default service;
 
-export const dialogLoginVisible = ref(false);
+export const unauthorized = ref(false);

@@ -45,9 +45,8 @@
       </el-menu>
     </el-header>
     <el-main>
-      <!-- todo:支持多用户 -->
       <el-dialog
-        v-model="dialogLoginVisible"
+        v-model="unauthorized"
         title="Login"
         width="30%"
         align-center
@@ -101,8 +100,8 @@
 </template>
 
 <script setup>
+import { unauthorized } from "@/request";
 import { ref, reactive } from "vue";
-import { dialogLoginVisible } from "./service/_request";
 import { useRoute, useRouter } from "vue-router";
 import authApi from "@/service/auth";
 
@@ -126,9 +125,9 @@ async function handelLogin() {
         return;
     }
 
-    const { code } = await authApi.login(loginForm);
+    const { code } = await authApi.authenticate(loginForm);
     if (!code) {
-        dialogLoginVisible.value = false;
+        unauthorized.value = false;
         router.go(0);
     }
 }

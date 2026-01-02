@@ -10,19 +10,7 @@ const connectQuery = require("connect-query");
 const createRouter = require("./router");
 const middleware = require("./middleware");
 
-if (hexo.config.admin) {
-    if (!hexo.config.admin.username) {
-        throw new Error("admin username config error");
-    }
-    if (!hexo.config.admin.password_hash || hexo.config.admin.password_hash.length <= 32) {
-        throw new Error("admin password_hash config error");
-    }
-    if (!hexo.config.admin.secret) {
-        throw new Error("admin secret config error");
-    }
-}
-
-
+//todo: 后端所有接口都加上更严格的校验 比如防止重复创建文章 重复发布文章等等
 hexo.extend.filter.register("server_middleware", function (app) {
     const adminRoot = hexo.config.root + "admin";
     const apiRoot = adminRoot + "/api";
@@ -53,4 +41,3 @@ hexo.extend.filter.register("server_middleware", function (app) {
     // error handler
     app.use(apiRoot, middleware.errorHandler);
 });
-

@@ -43,11 +43,13 @@ module.exports = {
         if (!article) throw new Error("The article with ID " + id + " was not found.");
         this.res.send(articleMapping(article));
     },
+    
     raw(type, id) {
         const article = this.service[type].raw(id);
         if (!article) throw new Error("The article with ID " + id + " was not found.");
         this.res.send({ "meta": article.data, "content": article.content });
     },
+
     async create(type) {
         const { meta, content } = this.req.body;
         const article = await this.service[type].create({ meta, content });

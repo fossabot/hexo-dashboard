@@ -1,7 +1,7 @@
-import request from "./_request";
+import request from "@/request";
 
 export default {
-    login({ username, password }) {
-        return request.post("login", { username, password });
+    authenticate({ username, password }) {
+        return request.post("auth", { username, password });
     },
 };

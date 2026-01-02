@@ -103,8 +103,8 @@ async function handleUploadImage(_event, insertImage, files) {
     void insertImage;
     void files;
     //todo: 实现
-    // const url = await api.uploadImage(files[0]);
-    // insertImage({url: url});
+    // const { data } = await api.uploadImage(files[0]);
+    // insertImage({ url: data.url });
 }
 </script>
 

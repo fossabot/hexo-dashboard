@@ -1,4 +1,4 @@
-import request from "./_request";
+import request from "@/request";
 
 export default {
     getConfig() {
