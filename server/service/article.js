@@ -41,21 +41,18 @@ module.exports = class ArticleService {
         return hfm.split(doc.raw);
     }
 
-    // todo: 重复文章创建检查
     async create({ meta, content }) {
-        const compiled = hfm.parse(["---", meta, "---"].join("\n"));
-        delete compiled._content;
-
+        const compiled = hfm.parse(["---", meta, "---", content].join("\n"));
         if (!compiled.title) throw new Error("Title cannot be empty.");
 
         compiled.updated = compiled.updated || new Date();
-        compiled.content = content;
         compiled.author = this.hexo.config.author;
         compiled.layout = this.type.toLowerCase();
-
         if (this.type === "Post") {
             compiled.categories = compiled.categories || [this.hexo.config.default_category];
         }
+
+        //todo: 初次创建文章时先草稿状态
         const file = await this.hexo.post.create(compiled);
         await this.hexo.source.process();
         return this.detail({ "source": this.getSource(file.path) });
@@ -63,8 +60,8 @@ module.exports = class ArticleService {
 
     async update(id, { meta, content }) {
         const doc = this.detail(id);
-
         const compiled = hfm.parse(["---", meta, "---", content].join("\n"));
+
         compiled.updated = compiled.updated || new Date();
         compiled.date = compiled.date || new Date(doc.date.valueOf());
         compiled.author = compiled.author || doc.author || this.hexo.config.author;
@@ -93,8 +90,11 @@ module.exports = class ArticleService {
         const postDir = path.join(this.hexo.source_dir, "_posts");
         const fullSource = path.join(postDir, path.basename(doc.full_source));
 
+        const exists = await fs.exists(postDir);
+        if (!exists) await fs.mkdir(postDir);
         await fs.rename(doc.full_source, fullSource);
         await this.hexo.source.process();
+
         const source = this.getSource(fullSource);
         return this.detail({ source });
     }
@@ -105,9 +105,10 @@ module.exports = class ArticleService {
         const draftDir = path.join(this.hexo.source_dir, "_drafts");
         const fullSource = path.join(draftDir, path.basename(doc.full_source));
 
-        const exists = fs.exists(draftDir);
+        const exists = await fs.exists(draftDir);
         if (!exists) await fs.mkdir(draftDir);
         await fs.rename(doc.full_source, fullSource);
+        await this.hexo.source.process();
 
         const source = this.getSource(fullSource);
         await this.hexo.source.process();
