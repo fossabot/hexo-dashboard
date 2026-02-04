@@ -64,13 +64,13 @@
     <!-- Table -->
     <div class="table-container">
       <el-table :data="articles" v-loading="loading" stripe>
-        <el-table-column :label="t('common.title')" min-width="200">
+        <el-table-column :label="t('common.title')" min-width="300">
           <template #default="{ row }">
             <span class="row-title" @click="$emit('edit', row.id)">{{ row.title }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column v-if="showStatusColumn" :label="t('common.status')" width="120">
+        <el-table-column v-if="showStatusColumn" :label="t('common.status')" min-width="100">
           <template #default="{ row }">
             <el-tag :type="row.isDraft ? 'info' : 'success'">
               {{ row.isDraft ? t('common.draft') : t('common.published') }}
@@ -78,25 +78,25 @@
           </template>
         </el-table-column>
 
-        <el-table-column v-if="showCategoryColumn" :label="t('common.category')" width="200" class-name="hide-on-mobile">
+        <el-table-column v-if="showCategoryColumn" :label="t('common.category')" min-width="150" class-name="hide-on-mobile">
           <template #default="{ row }">
             <span class="text-muted">{{ row.categories?.join(', ') || '-' }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column v-if="showTagColumn" :label="t('common.tag')" width="200" class-name="hide-on-mobile">
+        <el-table-column v-if="showTagColumn" :label="t('common.tag')" min-width="150" class-name="hide-on-mobile">
           <template #default="{ row }">
             <span class="text-muted">{{ row.tags?.join(', ') || '-' }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column v-if="showUpdatedColumn" :label="t('common.updated')" width="180" class-name="hide-on-mobile">
+        <el-table-column v-if="showUpdatedColumn" :label="t('common.updated')" min-width="150" class-name="hide-on-mobile">
           <template #default="{ row }">
             <span class="text-muted">{{ formatDate(row.updated) }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column :label="t('common.actions')" width="180" fixed="right">
+        <el-table-column :label="t('common.actions')" min-width="200">
           <template #default="{ row }">
             <div class="action-buttons">
               <el-button-group>
