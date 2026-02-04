@@ -1,8 +1,8 @@
-import type { ErrorHandleFunction } from 'connect';
+import type { ErrorRequestHandler } from 'express';
 
 import HttpError from '../errors/HttpError';
 
-const error: ErrorHandleFunction = (err, _req, res, next) => {
+const error: ErrorRequestHandler = (err, _req, res, next) => {
   if (res.headersSent) return next(err);
 
   res.setHeader('Content-Type', 'application/json');

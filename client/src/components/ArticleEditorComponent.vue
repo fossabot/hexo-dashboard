@@ -120,8 +120,6 @@ const loadArticle = async () => {
     const res = await props.api.getData(props.articleId);
     meta.value = res.meta;
     content.value = res.content;
-  } catch {
-    ElMessage.error(t('common.error'));
   } finally {
     loading.value = false;
   }
@@ -138,8 +136,6 @@ const handleSave = async () => {
       await props.api.update(props.articleId, meta.value, content.value);
       ElMessage.success(t('common.success'));
     }
-  } catch {
-    ElMessage.error(t('common.error'));
   } finally {
     saving.value = false;
   }

@@ -1,18 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 declare module 'connect' {
   import type { IncomingMessage, ServerResponse } from 'http';
 
-  export type NextFunction = (err?: any) => void;
-
-  export type SimpleHandleFunction = (req: IncomingMessage, res: ServerResponse) => void;
   export type NextHandleFunction = (req: IncomingMessage, res: ServerResponse, next: NextFunction) => void;
-  export type ErrorHandleFunction = (
-      err: any,
-      req: IncomingMessage,
-      res: ServerResponse,
-      next: NextFunction,
-  ) => void;
-  export type HandleFunction = SimpleHandleFunction | NextHandleFunction | ErrorHandleFunction;
 
   export interface Server extends NodeJS.EventEmitter {
     /**
@@ -27,6 +16,5 @@ declare module 'connect' {
      * not be invoked for _/_, or _/posts_.
      */
     use(route: string, fn: NextHandleFunction): Server;
-    use(route: string, fn: HandleFunction): Server;
   }
 }

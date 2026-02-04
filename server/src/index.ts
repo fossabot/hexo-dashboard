@@ -1,7 +1,7 @@
-import type { Server, NextHandleFunction } from 'connect';
+import type { Server } from 'connect';
 
-import { randomBytes } from 'crypto';
 import { join, posix } from 'path';
+import { randomBytes } from 'crypto';
 import express from 'express';
 import session from 'express-session';
 
@@ -15,13 +15,14 @@ import taxonomyRoute from './routes/taxonomy';
 
 hexo.extend.filter.register('server_middleware', function (app: Server) {
   const expressApp = express();
-  const root = posix.join('/', hexo.config.root, 'dashboard');
-  app.use(root, expressApp);
+  const dist = join(__dirname, '../../client/dist');
+  expressApp.set('trust proxy', 1);
 
-  expressApp.use('/', express.static(join(__dirname, '../../client/dist')));
+  expressApp.use(express.static(dist));
 
   expressApp.use('/api', express.json());
 
+  expressApp.use('/api', authMiddleware);
   expressApp.use('/api', session({
     secret: randomBytes(32).toString('hex'),
     resave: false,
@@ -32,8 +33,7 @@ hexo.extend.filter.register('server_middleware', function (app: Server) {
       sameSite: 'lax',
       maxAge: 1000 * 60 * 60,
     },
-  }) as NextHandleFunction);
-  expressApp.use('/api', authMiddleware);
+  }));
 
   const router = express.Router();
   router.use('/articles', articleRoute(hexo));
@@ -43,4 +43,10 @@ hexo.extend.filter.register('server_middleware', function (app: Server) {
   expressApp.use('/api', router);
 
   expressApp.use('/api', errorHandler);
+
+  expressApp.get('/{*path}', (_req, res) => {
+    res.sendFile(join(dist, 'index.html'));
+  });
+
+  app.use(posix.join('/', hexo.config.root, 'dashboard'), expressApp);
 });

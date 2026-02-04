@@ -222,8 +222,6 @@ const loadArticles = async () => {
     const res = await props.api.getList(currentPage.value, filters.title, filters.category, filters.tag);
     articles.value = res.list;
     total.value = res.total;
-  } catch {
-    ElMessage.error(t('common.error'));
   } finally {
     loading.value = false;
   }
@@ -231,16 +229,12 @@ const loadArticles = async () => {
 
 const loadTaxonomies = async () => {
   if (!props.taxonomyApi) return;
-  try {
-    const [categoryRes, tagRes] = await Promise.all([
-      props.taxonomyApi.getCategories(),
-      props.taxonomyApi.getTags(),
-    ]);
-    categories.value = categoryRes.taxonomies;
-    tags.value = tagRes.taxonomies;
-  } catch {
-    ElMessage.error(t('common.error'));
-  }
+  const [categoryRes, tagRes] = await Promise.all([
+    props.taxonomyApi.getCategories(),
+    props.taxonomyApi.getTags(),
+  ]);
+  categories.value = categoryRes.taxonomies;
+  tags.value = tagRes.taxonomies;
 };
 
 const resetFilters = () => {
@@ -257,48 +251,36 @@ const handleCreate = () => {
 
 const handlePublish = async (article: Article) => {
   if (!props.api.publish) return;
-  try {
-    await ElMessageBox.confirm(t('posts.publishConfirm'), t('common.confirm'), {
-      confirmButtonText: t('common.confirm'),
-      cancelButtonText: t('common.cancel'),
-    });
-    await props.api.publish(article.id);
-    ElMessage.success(t('common.success'));
-    loadArticles();
-  } catch (error) {
-    if (error !== 'cancel') ElMessage.error(t('common.error'));
-  }
+  await ElMessageBox.confirm(t('posts.publishConfirm'), t('common.confirm'), {
+    confirmButtonText: t('common.confirm'),
+    cancelButtonText: t('common.cancel'),
+  });
+  await props.api.publish(article.id);
+  ElMessage.success(t('common.success'));
+  loadArticles();
 };
 
 const handleUnpublish = async (article: Article) => {
   if (!props.api.unpublish) return;
-  try {
-    await ElMessageBox.confirm(t('posts.unpublishConfirm'), t('common.confirm'), {
-      confirmButtonText: t('common.confirm'),
-      cancelButtonText: t('common.cancel'),
-      type: 'warning',
-    });
-    await props.api.unpublish(article.id);
-    ElMessage.success(t('common.success'));
-    loadArticles();
-  } catch (error) {
-    if (error !== 'cancel') ElMessage.error(t('common.error'));
-  }
+  await ElMessageBox.confirm(t('posts.unpublishConfirm'), t('common.confirm'), {
+    confirmButtonText: t('common.confirm'),
+    cancelButtonText: t('common.cancel'),
+    type: 'warning',
+  });
+  await props.api.unpublish(article.id);
+  ElMessage.success(t('common.success'));
+  loadArticles();
 };
 
 const handleDelete = async (article: Article) => {
-  try {
-    await ElMessageBox.confirm(props.deleteConfirmText, t('common.confirm'), {
-      confirmButtonText: t('common.confirm'),
-      cancelButtonText: t('common.cancel'),
-      type: 'warning',
-    });
-    await props.api.remove(article.id);
-    ElMessage.success(t('common.success'));
-    loadArticles();
-  } catch (error) {
-    if (error !== 'cancel') ElMessage.error(t('common.error'));
-  }
+  await ElMessageBox.confirm(props.deleteConfirmText, t('common.confirm'), {
+    confirmButtonText: t('common.confirm'),
+    cancelButtonText: t('common.cancel'),
+    type: 'warning',
+  });
+  await props.api.remove(article.id);
+  ElMessage.success(t('common.success'));
+  loadArticles();
 };
 
 onMounted(() => {

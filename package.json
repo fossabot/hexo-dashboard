@@ -13,9 +13,12 @@
   "bugs": {
     "url": "https://github.com/Meteor2333/hexo-dashboard/issues"
   },
-  "main": "./server/dist/index.js",
   "engines": {
     "node": ">=20.19.0"
+  },
+  "main": "./server/dist/index.js",
+  "bin": {
+    "hexo-dashboard": "./bin/hexo-dashboard.js"
   },
   "scripts": {
     "build": "pnpm run client:build && pnpm run server:build",

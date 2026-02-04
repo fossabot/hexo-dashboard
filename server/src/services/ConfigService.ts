@@ -1,7 +1,9 @@
 import type Hexo from 'hexo';
 
-import { dirname, join } from 'path';
+import { join } from 'path';
 import { exists, readFile, writeFile } from 'hexo-fs';
+import load_config from 'hexo/dist/hexo/load_config';
+import load_theme_config from 'hexo/dist/hexo/load_theme_config';
 
 export default class ConfigService {
   private hexo: Hexo;
@@ -10,12 +12,11 @@ export default class ConfigService {
 
   constructor(hexo: Hexo, type: 'mainconfig' | 'themeconfig') {
     this.hexo = hexo;
-    const path = dirname(require.resolve('hexo'));
     switch (type) {
       case 'mainconfig':
         this.paths = [hexo.config_path];
         this.loadFunc = async (hexo: Hexo) => {
-          return (await import(join(path, 'load_config'))).default(hexo);
+          return load_config(hexo);
         };
         break;
       case 'themeconfig':
@@ -24,7 +25,7 @@ export default class ConfigService {
           join(hexo.theme_dir, '_config.yml'),
         ];
         this.loadFunc = async (hexo: Hexo) => {
-          return (await import(join(path, 'load_config'))).default(hexo);
+          return load_theme_config(hexo);
         };
         break;
       default:

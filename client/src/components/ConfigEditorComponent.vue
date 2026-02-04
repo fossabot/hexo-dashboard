@@ -70,8 +70,6 @@ const loadConfig = async () => {
   try {
     const res = await props.api.getConfig();
     config.value = res.config;
-  } catch {
-    ElMessage.error(t('common.error'));
   } finally {
     loading.value = false;
   }
@@ -82,8 +80,6 @@ const handleSave = async () => {
   try {
     await props.api.updateConfig(config.value);
     ElMessage.success(t('config.saveSuccess'));
-  } catch {
-    ElMessage.error(t('config.saveError'));
   } finally {
     saving.value = false;
   }
