@@ -1,14 +1,11 @@
-import type { NextHandleFunction } from 'connect';
+import type { RequestHandler } from 'express';
 
-// import UnauthorizedError from '../errors/UnauthorizedError';
+import UnauthorizedError from '../errors/UnauthorizedError';
 
-const auth: NextHandleFunction = (req, _res, next) => {
-  void req;
-  //todo
-  // if (req.url?.includes('/auth')) return next();
-  // if (req.session && req.session.loggedin) return next();
-  // throw new UnauthorizedError('Please login first!');
-  return next();
+const auth: RequestHandler = (req, _res, next) => {
+  if (req.session.loggedin) return next();
+  if (req.url?.includes('/auth')) return next();
+  throw new UnauthorizedError('Please login first!');
 };
 
 export default auth;

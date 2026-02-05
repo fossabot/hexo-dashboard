@@ -29,8 +29,7 @@ export default class AuthController {
       throw new UnauthorizedError('Invalid username or password!');
     }
 
-    //todo
-    // req.session.loggedin = true;
+    req.session.loggedin = true;
     res.end();
   };
 }

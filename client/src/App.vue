@@ -88,6 +88,7 @@
       v-model="showLoginDialog"
       :title="t('auth.login')"
       width="400px"
+      align-center
       :close-on-click-modal="false"
       :close-on-press-escape="false"
       :show-close="false"
@@ -181,6 +182,7 @@ const handleLogin = async () => {
     unauthorized.value = false;
     loginForm.value = { username: '', password: '' };
     ElMessage.success(t('auth.loginSuccess'));
+    location.reload();
   } catch {
     ElMessage.error(t('auth.loginError'));
   } finally {

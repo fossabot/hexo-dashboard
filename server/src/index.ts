@@ -22,18 +22,18 @@ hexo.extend.filter.register('server_middleware', function (app: Server) {
 
   expressApp.use('/api', express.json());
 
-  expressApp.use('/api', authMiddleware);
   expressApp.use('/api', session({
     secret: randomBytes(32).toString('hex'),
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: true,
+      secure: 'auto',
       sameSite: 'lax',
       maxAge: 1000 * 60 * 60,
     },
   }));
+  expressApp.use('/api', authMiddleware);
 
   const router = express.Router();
   router.use('/articles', articleRoute(hexo));
