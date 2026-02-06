@@ -8,11 +8,8 @@ export default class AuthService {
   ) {
   }
 
-  // todo: username目前没用 给未来支持多用户做准备
   authenticate(username: string, password: string): boolean {
-    void username;
-    const hash = this.hexo.config.dashboard.password_hash;
-    if (!compareSync(password, hash)) return false;
-    return true;
+    const target = this.hexo.config.dashboard[username];
+    return compareSync(password, target);
   }
 };
