@@ -17,12 +17,15 @@
     "node": ">=20.19.0"
   },
   "main": "./server/dist/index.js",
+  "types": "./server/dist/index.d.ts",
+  "files": ["bin", "client/dist", "server/dist"],
   "bin": {
     "hexo-dashboard": "./bin/hexo-dashboard"
   },
   "scripts": {
     "build": "pnpm run client:build && pnpm run server:build",
     "lint": "eslint . --fix --cache",
+    "prepublishOnly": "pnpm run build",
 
     "client:dev": "vite dev client ",
     "client:build": "pnpm run client:type-check && vite build client",
