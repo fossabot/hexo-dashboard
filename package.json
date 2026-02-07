@@ -1,6 +1,6 @@
 {
   "name": "hexo-dashboard",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "A hexo dashboard plugin, for live blog server.",
   "author": "thesadabc",
   "license": "MIT",
@@ -18,7 +18,11 @@
   },
   "main": "./server/dist/index.js",
   "types": "./server/dist/index.d.ts",
-  "files": ["bin", "client/dist", "server/dist"],
+  "files": [
+    "bin",
+    "client/dist",
+    "server/dist"
+  ],
   "bin": {
     "hexo-dashboard": "./bin/hexo-dashboard"
   },
@@ -26,12 +30,10 @@
     "build": "pnpm run client:build && pnpm run server:build",
     "lint": "eslint . --fix --cache",
     "prepublishOnly": "pnpm run build",
-
     "client:dev": "vite dev client ",
     "client:build": "pnpm run client:type-check && vite build client",
     "client:type-check": "vue-tsc --build client/tsconfig.json",
     "client:lint": "eslint client --fix",
-    
     "server:build": "tsc -p server/tsconfig.json",
     "server:lint": "eslint server --fix"
   },
