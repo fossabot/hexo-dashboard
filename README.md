@@ -92,7 +92,7 @@ After registration, your `_config.yml` will contain:
 
 ```yaml
 dashboard:
-  admin: $2a$10$ABC...xyz    # bcrypt hashed password
+  admin: $2b$12$ABC...xyz    # bcrypt hashed password
 ```
 
 ## Troubleshooting | 常见问题
