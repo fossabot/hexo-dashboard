@@ -118,8 +118,8 @@ npx hexo-dashboard register admin password
 
 ## Security Notes | 安全提示
 
-- ⚠️ Passwords are hashed with bcrypt (cost factor: 10)  
-  密码使用 bcrypt 加密（成本因子：10）
+- ⚠️ Passwords are hashed with bcrypt (cost factor: 12)  
+  密码使用 bcrypt 加密（成本因子：12）
 
 - ⚠️ Never commit plaintext passwords to version control  
   不要将明文密码提交到版本控制
