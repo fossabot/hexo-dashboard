@@ -1,5 +1,5 @@
 import request from '@/request';
-import type { Config } from '@/../types/api';
+import type { Config } from '@/types';
 
 export default {
   getConfig() {

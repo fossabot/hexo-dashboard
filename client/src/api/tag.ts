@@ -1,5 +1,5 @@
 import request from '@/request';
-import type { TaxonomyList } from '@/../types/api';
+import type { TaxonomyList } from '@/types';
 
 export default {
   getTags() {

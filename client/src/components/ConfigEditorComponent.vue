@@ -36,7 +36,7 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/base16-dark.css';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/composables/useTheme';
-import type { Config } from '@/../types/api';
+import type { Config } from '@/types';
 
 interface ConfigApi {
   getConfig: () => Promise<Config>;

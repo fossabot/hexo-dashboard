@@ -1,5 +1,5 @@
 import request from '@/request';
-import type { Article, ArticleList, ArticleData } from '@/../types/api';
+import type { Article, ArticleList, ArticleData } from '@/types';
 
 export default {
   getPosts(page: number, title: string, category: string, tag: string) {

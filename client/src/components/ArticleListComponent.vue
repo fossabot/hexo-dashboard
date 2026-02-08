@@ -150,7 +150,7 @@ import { ref, reactive, onMounted } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Plus, Search } from '@element-plus/icons-vue';
 import { useI18n } from '@/i18n';
-import type { Article, ArticleList, TaxonomyList } from '@/../types/api';
+import type { Article, ArticleList, TaxonomyList } from '@/types';
 
 interface ArticleApi {
   getList: (page: number, title: string, category: string, tag: string) => Promise<ArticleList>;

@@ -60,7 +60,7 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/base16-dark.css';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/composables/useTheme';
-import type { Article, ArticleData } from '@/../types/api';
+import type { Article, ArticleData } from '@/types';
 
 interface ArticleApi {
   getData: (id: string) => Promise<ArticleData>;
