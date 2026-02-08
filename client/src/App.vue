@@ -93,12 +93,12 @@
       :close-on-press-escape="false"
       :show-close="false"
     >
-      <el-form @submit.prevent="handleLogin">
-        <el-form-item :label="t('auth.username')">
+      <el-form ref="loginFormRef" :model="loginForm" label-width="auto" @submit.prevent="handleLogin">
+        <el-form-item required :label="t('auth.username')" prop="username">
           <el-input v-model="loginForm.username" autocomplete="username" />
         </el-form-item>
-        <el-form-item :label="t('auth.password')">
-          <el-input v-model="loginForm.password" type="password" autocomplete="current-password" />
+        <el-form-item required :label="t('auth.password')" prop="password">
+          <el-input v-model="loginForm.password" type="password" show-password autocomplete="current-password" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" native-type="submit" :loading="loginLoading" style="width: 100%">
@@ -125,7 +125,7 @@ import {
   Moon,
   Close,
 } from '@element-plus/icons-vue';
-import { ElMessage } from 'element-plus';
+import { ElMessage, type FormInstance } from 'element-plus';
 import { useI18n, type Language } from '@/i18n';
 import { useTheme } from '@/composables/useTheme';
 import { unauthorized } from '@/request';
@@ -141,6 +141,7 @@ const isMobile = ref(false);
 const showLoginDialog = ref(false);
 const loginLoading = ref(false);
 
+const loginFormRef = ref<FormInstance>();
 const loginForm = ref({
   username: '',
   password: '',
@@ -171,7 +172,9 @@ const checkMobile = () => {
 };
 
 const handleLogin = async () => {
-  if (!loginForm.value.username || !loginForm.value.password) {
+  try {
+    await loginFormRef.value?.validate();
+  } catch {
     return;
   }
 
