@@ -6,8 +6,8 @@ A Vue-based dashboard for managing your Hexo blog. Edit posts, pages, and config
 
 ## Features | 功能特点
 
-- 📝 **Post & Page Management** - Create, edit, and delete posts and pages  
-  文章与页面管理 - 创建、编辑和删除文章或页面
+- 📝 **Post & Page Management** - Create, edit, and delete  
+  管理文章与页面 - 创建、编辑和删除
 
 - ⚙️ **Configuration Editor** - Edit `_config.yml` and theme config  
   配置编辑器 - 编辑站点配置和主题配置
