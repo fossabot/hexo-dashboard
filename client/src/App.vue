@@ -93,19 +93,21 @@
       :close-on-press-escape="false"
       :show-close="false"
     >
-      <el-form ref="loginFormRef" :model="loginForm" label-width="auto" @submit.prevent="handleLogin">
+      <el-form ref="loginFormRef" :model="loginForm" label-width="auto">
         <el-form-item required :label="t('auth.username')" prop="username">
           <el-input v-model="loginForm.username" autocomplete="username" />
         </el-form-item>
         <el-form-item required :label="t('auth.password')" prop="password">
           <el-input v-model="loginForm.password" type="password" show-password autocomplete="current-password" />
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" native-type="submit" :loading="loginLoading" style="width: 100%">
-            {{ t('auth.login') }}
-          </el-button>
-        </el-form-item>
       </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="primary" :loading="loginLoading" @click="handleLogin">
+            {{ t('auth.submit') }}
+          </el-button>
+        </div>
+      </template>
     </el-dialog>
   </div>
 </template>
