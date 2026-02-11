@@ -84,7 +84,8 @@ export default class ArticleController {
     }
 
     const article = await this.services[type].create(meta, content);
-    res.json(this.serializeArticle(article));
+    const serialized = this.serializeArticle(article);
+    res.status(201).location(`/${type}s/${serialized.id}`).json(serialized);
   };
 
   update: RequestHandler = async (req, res) => {
@@ -125,7 +126,7 @@ export default class ArticleController {
     }
 
     await this.services[type].remove(id);
-    res.end();
+    res.status(204).end();
   };
 
   changeStatus: RequestHandler = async (req, res) => {
@@ -161,7 +162,8 @@ export default class ArticleController {
     res.json(this.serializeArticle(article));
   };
 
-  private serializeArticle(article: Document<PostSchema | PageSchema> | undefined): object {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private serializeArticle(article: Document<PostSchema | PageSchema> | undefined): Record<string, any> {
     if (!article) throw new Error('Article was not found!');
     if (article instanceof Array) return article.map(a => this.serializeArticle(a));
     const serialized = {

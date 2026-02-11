@@ -75,11 +75,6 @@ const props = defineProps<{
   api: ArticleApi;
 }>();
 
-const emit = defineEmits<{
-  back: [];
-  saved: [id: string];
-}>();
-
 const { t } = useI18n();
 const { currentTheme } = useTheme();
 
@@ -129,9 +124,8 @@ const handleSave = async () => {
   saving.value = true;
   try {
     if (isNew.value) {
-      const res = await props.api.create(meta.value, content.value);
+      await props.api.create(meta.value, content.value);
       ElMessage.success(t('common.success'));
-      emit('saved', res.id);
     } else {
       await props.api.update(props.articleId, meta.value, content.value);
       ElMessage.success(t('common.success'));

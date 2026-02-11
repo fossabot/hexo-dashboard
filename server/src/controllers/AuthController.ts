@@ -32,7 +32,7 @@ export default class AuthController {
     req.session.regenerate((err) => {
       if (err) throw err;
       req.session.loggedin = true;
-      res.end();
+      res.status(204).end();
     });
   };
 }

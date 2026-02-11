@@ -5,7 +5,6 @@
     :default-meta="defaultMeta"
     :api="api"
     @back="router.push('/pages')"
-    @saved="(id) => router.replace(`/pages/${id}`)"
   />
 </template>
 

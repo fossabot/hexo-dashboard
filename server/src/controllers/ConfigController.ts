@@ -46,7 +46,7 @@ export default class ConfigController {
     }
 
     await this.services[type].updateConfig(config);
-    res.end();
+    res.status(204).end();
   };
 }
 
