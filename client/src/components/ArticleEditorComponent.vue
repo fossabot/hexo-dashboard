@@ -50,7 +50,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import { ArrowLeft, Check, Document, EditPen } from '@element-plus/icons-vue';
 import Codemirror from 'codemirror-editor-vue3';
@@ -77,6 +78,7 @@ const props = defineProps<{
 
 const { t } = useI18n();
 const { currentTheme } = useTheme();
+const route = useRoute();
 
 const isNew = computed(() => props.articleId === 'new');
 
@@ -136,6 +138,10 @@ const handleSave = async () => {
 };
 
 onMounted(() => {
+  loadArticle();
+});
+
+watch(() => route.params.id, () => {
   loadArticle();
 });
 </script>
