@@ -5,7 +5,7 @@ import { randomBytes } from 'crypto';
 import express from 'express';
 import session from 'express-session';
 
-import authMiddleware from './middlewares/auth';
+import authGuard from './middlewares/authGuard';
 import errorHandler from './middlewares/errorHandler';
 
 import articleRoute from './routes/article';
@@ -15,9 +15,9 @@ import taxonomyRoute from './routes/taxonomy';
 
 hexo.extend.filter.register('server_middleware', function (app: Server) {
   const expressApp = express();
-  const dist = join(__dirname, '../../client/dist');
   expressApp.set('trust proxy', 1);
 
+  const dist = join(__dirname, '../../client/dist');
   expressApp.use(express.static(dist));
 
   expressApp.use('/api', express.json());
@@ -32,8 +32,7 @@ hexo.extend.filter.register('server_middleware', function (app: Server) {
       sameSite: 'lax',
       maxAge: 1000 * 60 * 60,
     },
-  }));
-  expressApp.use('/api', authMiddleware);
+  }), authGuard);
 
   const router = express.Router();
   router.use('/articles', articleRoute(hexo));
