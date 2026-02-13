@@ -15,8 +15,7 @@ export default class TaxonomyController {
   }
 
   getTaxonomies: RequestHandler = (req, res) => {
-    const query = req.query;
-    const type = query.type;
+    const type = req.query.type;
     if (!type || typeof type !== 'string' || !this.services[type]) {
       throw new BadRequestError("Invalid 'type' query parameter!");
     };
