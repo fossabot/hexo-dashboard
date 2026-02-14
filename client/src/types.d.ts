@@ -22,6 +22,10 @@ export interface Config {
   config: string;
 }
 
+export interface UploadResult {
+  url: string;
+}
+
 export interface TaxonomyList {
   taxonomies: string[];
 }

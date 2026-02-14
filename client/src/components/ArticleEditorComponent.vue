@@ -39,9 +39,12 @@
         </div>
         <div class="content-editor">
           <Codemirror
+            ref="cmRef"
             v-model:value="content"
             :options="markdownOptions"
             class="code-editor"
+            @drop="onDrop"
+            @paste="onPaste"
           />
         </div>
       </div>
@@ -61,7 +64,9 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/base16-dark.css';
 import { useI18n } from '@/i18n';
 import { useTheme } from '@/composables/useTheme';
+import uploadApi from '@/api/upload';
 import type { Article, ArticleData } from '@/types';
+import type { CmComponentRef } from 'codemirror-editor-vue3';
 
 interface ArticleApi {
   getData: (id: string) => Promise<ArticleData>;
@@ -86,6 +91,7 @@ const loading = ref(false);
 const saving = ref(false);
 const meta = ref('');
 const content = ref('');
+const cmRef = ref<CmComponentRef>();
 
 const editorTheme = computed(() => currentTheme.value === 'dark' ? 'base16-dark' : 'default');
 
@@ -135,6 +141,42 @@ const handleSave = async () => {
   } finally {
     saving.value = false;
   }
+};
+
+const onDrop = (event: DragEvent) => {
+  event.preventDefault();
+  handleImages(event.dataTransfer?.files);
+};
+
+const onPaste = (event: ClipboardEvent) => {
+  event.preventDefault();
+  handleImages(event.clipboardData?.files);
+};
+
+const handleImages = async (files: FileList | undefined) => {
+  if (!files || files.length === 0) return;
+
+  const cminstance = cmRef.value?.cminstance;
+  if (!cminstance) return;
+
+  const selections: Array<{ anchor: Codemirror.Position; head: Codemirror.Position }> = [];
+  for (const file of files) {
+    if (!file.type.startsWith('image/')) continue;
+
+    ElMessage.success(t('editor.uploading'));
+    const filename = file.name;
+    const { url } = await uploadApi.upload(file);
+    cminstance.replaceSelection(`![${filename}](${url})`, 'end');
+
+    const cursor = cminstance.getCursor();
+    selections.push({
+      anchor: { line: cursor.line, ch: cursor.ch - url.length - filename.length - 3 },
+      head: { line: cursor.line, ch: cursor.ch - url.length - 3 },
+    });
+  }
+
+  cminstance.setSelections(selections);
+  cminstance.focus();
 };
 
 onMounted(() => {
