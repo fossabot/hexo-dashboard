@@ -99,7 +99,7 @@ export default class ArticleService {
     return this.findDocument({ 'source': this.toRelativePath(fullSource) });
   }
 
-  findDocument(query: string | object) {
+  private findDocument(query: string | object) {
     if (typeof (query) === 'string') {
       return this.model.findById(query);
     } else {
@@ -107,7 +107,7 @@ export default class ArticleService {
     }
   }
 
-  toRelativePath(path: string) {
+  private toRelativePath(path: string) {
     return path.slice(this.hexo.source_dir.length).replace(/\\/g, '/');
   }
 };
