@@ -1,4 +1,6 @@
 # Hexo Dashboard
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMeteor2333%2Fhexo-dashboard.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FMeteor2333%2Fhexo-dashboard?ref=badge_shield)
+
 
 A Vue-based dashboard for managing your [Hexo](https://hexo.io/) blog. Edit posts, pages, and configurations directly from the browser.
 
@@ -112,3 +114,6 @@ npx hexo-dashboard ...
 
 - [hexo-admin](https://github.com/jaredly/hexo-admin)
 - [hexo-myadmin](https://github.com/xjpin/hexo-myadmin)
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FMeteor2333%2Fhexo-dashboard.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FMeteor2333%2Fhexo-dashboard?ref=badge_large)
