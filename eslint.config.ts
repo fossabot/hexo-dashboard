@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { globalIgnores } from 'eslint/config';
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript';
 import pluginVue from 'eslint-plugin-vue';

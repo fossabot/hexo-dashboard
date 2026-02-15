@@ -1,7 +1,6 @@
 <template>
   <div
     class="article-editor"
-    tabindex="0"
     @keydown.ctrl.s.prevent.stop="handleSave"
     @keydown.meta.s.prevent.stop="handleSave"
   >

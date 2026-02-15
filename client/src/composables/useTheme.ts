@@ -9,7 +9,7 @@ function getDefaultTheme(): Theme {
   if (stored === 'light' || stored === 'dark') {
     return stored;
   }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return globalThis.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 export const currentTheme = ref<Theme>(getDefaultTheme());

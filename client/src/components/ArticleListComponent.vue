@@ -1,7 +1,6 @@
 <template>
   <div
     class="article-list"
-    tabindex="0"
   >
     <div class="page-header">
       <h2 class="page-title">{{ title }}</h2>

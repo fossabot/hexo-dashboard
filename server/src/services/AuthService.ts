@@ -6,7 +6,7 @@ export default class AuthService {
   private readonly users: Record<string, string> = {};
 
   constructor(
-    private hexo: Hexo,
+    private readonly hexo: Hexo,
   ) {
     const config = this.hexo.config.dashboard;
     for (const name in config) {

@@ -95,7 +95,7 @@
     >
       <el-form ref="loginFormRef" :model="loginForm" label-width="auto">
         <el-form-item required :label="t('auth.username')" prop="username">
-          <el-input v-model="loginForm.username" autocomplete="username" />
+          <el-input v-model="loginForm.username" type="text" autocomplete="username" />
         </el-form-item>
         <el-form-item required :label="t('auth.password')" prop="password">
           <el-input v-model="loginForm.password" type="password" show-password autocomplete="current-password" />
@@ -167,7 +167,7 @@ const onLanguageChange = (lang: Language) => {
 };
 
 const checkMobile = () => {
-  isMobile.value = window.innerWidth < 768;
+  isMobile.value = globalThis.innerWidth < 768;
   if (!isMobile.value) {
     mobileMenuOpen.value = false;
   }
@@ -195,7 +195,7 @@ const handleLogin = async () => {
   }
 };
 
-window.addEventListener('load', () => {
+globalThis.addEventListener('load', () => {
   if (sessionStorage.getItem('loginSuccess')) {
     ElMessage.success(t('auth.loginSuccess'));
     sessionStorage.removeItem('loginSuccess');
@@ -212,11 +212,11 @@ watch(currentLanguage, (val) => {
 
 onMounted(() => {
   checkMobile();
-  window.addEventListener('resize', checkMobile);
+  globalThis.addEventListener('resize', checkMobile);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', checkMobile);
+  globalThis.removeEventListener('resize', checkMobile);
 });
 </script>
 

@@ -3,7 +3,7 @@ import type { CategorySchema, TagSchema } from 'hexo/dist/types';
 
 export default class TaxonomyService {
   constructor(
-    private model: Model<CategorySchema | TagSchema>,
+    private readonly model: Model<CategorySchema | TagSchema>,
   ) {
   }
 

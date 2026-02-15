@@ -3,8 +3,8 @@ import type Hexo from 'hexo';
 import { Router } from 'express';
 import ArticleController from '../controllers/ArticleController';
 
-export default function (hexo: Hexo) {
-  const router = Router();
+export default function articleRoute(hexo: Hexo) {
+  const router: Router = Router();
   const controller = new ArticleController(hexo);
 
   router.get('/', controller.getArticles);

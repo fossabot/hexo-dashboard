@@ -1,14 +1,14 @@
 import type Hexo from 'hexo';
 
-import { join } from 'path';
+import { join } from 'node:path';
 import { exists, readFile, writeFile } from 'hexo-fs';
 import load_config from 'hexo/dist/hexo/load_config';
 import load_theme_config from 'hexo/dist/hexo/load_theme_config';
 
 export default class ConfigService {
-  private hexo: Hexo;
-  private paths: string[];
-  private loadFunc: (hexo: Hexo) => Promise<void>;
+  private readonly hexo: Hexo;
+  private readonly paths: string[];
+  private readonly loadFunc: (hexo: Hexo) => Promise<void>;
 
   constructor(hexo: Hexo, type: 'mainconfig' | 'themeconfig') {
     this.hexo = hexo;
