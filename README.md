@@ -1,5 +1,9 @@
 # Hexo Dashboard
 
+[![NPM version](https://badge.fury.io/js/hexo-dashboard.svg)](https://www.npmjs.com/package/hexo-dashboard)
+[![Required Node version](https://img.shields.io/node/v/hexo)]()
+[![Dependencies Status](https://img.shields.io/librariesio/release/npm/hexo-dashboard)](https://libraries.io/npm/hexo-dashboard)
+
 A Vue-based dashboard for managing your [Hexo](https://hexo.io/) blog. Edit posts, pages, and configurations directly from the browser.
 
 一个基于 Vue 的 [Hexo](https://hexo.io/zh-cn/) 博客管理面板。在浏览器中直接编辑文章、页面和配置。
