@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { join, resolve } = require('path');
+const { join, resolve } = require('node:path');
 const { readFileSync, writeFileSync, existsSync } = require('fs');
 const { hashSync } = require('bcryptjs');
 const readline = require('readline');

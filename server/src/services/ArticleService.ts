@@ -4,15 +4,15 @@ import type Query from 'query';
 import type Document from 'document';
 import type { CategorySchema, PageSchema, PostSchema, TagSchema } from 'hexo/dist/types';
 
-import { basename, dirname, join } from 'path';
+import { basename, dirname, join } from 'node:path';
 import { parse, split, stringify } from 'hexo-front-matter';
 import { exists, mkdir, rename, rmdir, unlink, writeFile } from 'hexo-fs';
 
 export default class ArticleService {
   constructor(
-    private hexo: Hexo,
-    private type: string,
-    private model: Model<PostSchema | PageSchema>,
+    private readonly hexo: Hexo,
+    private readonly type: string,
+    private readonly model: Model<PostSchema | PageSchema>,
   ) {
   }
 
@@ -108,6 +108,6 @@ export default class ArticleService {
   }
 
   private toRelativePath(path: string) {
-    return path.slice(this.hexo.source_dir.length).replace(/\\/g, '/');
+    return path.slice(this.hexo.source_dir.length).replaceAll(/\\/g, '/');
   }
 };

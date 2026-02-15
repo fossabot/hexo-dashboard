@@ -41,7 +41,7 @@ export default class ArticleController {
     const articles = this.services[type].getArticles(title, category, tag);
     const total = articles.length;
     const list = articles
-      .skip((Math.max(1, parseInt(page) || 1) - 1) * size)
+      .skip((Math.max(1, Number.parseInt(page) || 1) - 1) * size)
       .limit(size)
       .map(this.serializeArticle);
     res.json({ total, list });
@@ -165,7 +165,7 @@ export default class ArticleController {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private serializeArticle(article: Document<PostSchema | PageSchema> | undefined): Record<string, any> {
     if (!article) throw new Error('Article was not found!');
-    if (article instanceof Array) return article.map(a => this.serializeArticle(a));
+    if (Array.isArray(article)) return article.map(a => this.serializeArticle(a));
     const serialized = {
       'id': article._id,
       'title': article.title,

@@ -1,7 +1,7 @@
 import type { Server } from 'connect';
 
-import { join, posix } from 'path';
-import { randomBytes } from 'crypto';
+import { join, posix } from 'node:path';
+import { randomBytes } from 'node:crypto';
 import express from 'express';
 import session from 'express-session';
 import fileupload from 'express-fileupload';
